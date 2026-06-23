@@ -51,7 +51,7 @@ def chunk_and_checkpoint(
         raise ValueError(msg)
 
     # Perform checkpointed computation.
-    results = []
+    results: list[torch.Tensor] = []
     n = 0
     while n < batch_dim_len:
         length = min(batch_dim_len - n, chunk_size)
@@ -60,4 +60,4 @@ def chunk_and_checkpoint(
         n = n + chunk_size
 
     # Concatenate the results and return them.
-    return torch.concatenate(results, axis=batch_dim)
+    return torch.concatenate(results, dim=batch_dim)
