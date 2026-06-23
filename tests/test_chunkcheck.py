@@ -20,7 +20,7 @@ class MLP(torch.nn.Module):
         return self.net(x)
 
 
-def test_tensor_value_error() -> None:
+def test_parameter_validation() -> None:
     x = torch.randn(5, 4)
     y = torch.randn(4, 4)
     with pytest.raises(ValueError, match=r"At least one positional argument required."):
@@ -33,6 +33,8 @@ def test_tensor_value_error() -> None:
         chunk_and_checkpoint(lambda x: x, x, y, chunk_size=1)
     with pytest.raises(ValueError, match=r"Not all tensors have requested batch axis."):
         chunk_and_checkpoint(lambda x: x, x, chunk_size=1, batch_dim=2)
+    with pytest.raises(ValueError, match=r"chunk_size must be greater than 0."):
+        chunk_and_checkpoint(lambda x: x, x, chunk_size=0)
 
 
 @pytest.mark.parametrize("chunk_size", [1, 2, 3, 4])

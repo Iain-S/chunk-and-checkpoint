@@ -45,6 +45,11 @@ def chunk_and_checkpoint(
             msg = "All arguments must have the same batch dim length."
             raise ValueError(msg)
 
+    # Verify that chunk_size is greater than 0.
+    if not (chunk_size > 0):
+        msg = "chunk_size must be greater than 0."
+        raise ValueError(msg)
+
     # Perform checkpointed computation.
     results = []
     n = 0
