@@ -17,7 +17,7 @@ def chunk_and_checkpoint(
     Args:
         f: A callable.
         xs: A collection of `torch.Tensor`s.
-        chunk_size: The number of chunks to divide each element of `xs` into.
+        chunk_size: The size of the chunks to divide each element of `xs` into.
         batch_dim: The dimension of each element of `xs` along which to divide.
 
     """
